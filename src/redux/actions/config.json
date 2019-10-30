@@ -1,0 +1,9 @@
+{
+    "news":{
+        "API_KEY": "56ab743a6a334b1892661dcb95043822",
+        "API_URL": "https://newsapi.org/v2/",
+        "PARAM": "domains=washingtonpost.com,nytimes.com",
+        "PAGE_SIZE": 100,
+        "RECORD_COUNT": 10
+    }
+}
