@@ -16,25 +16,28 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 ## Project Description
-It is a simple Weather App which is using OpenWeather API and using React + Redux + SASS + WEBPACK. 
-- Users can type the city/town in the search bar (default is Hong Kong), it will return the current weather and coming 5 days forecast. 
-- Users can select the days with "Show Details" button and it will return the current day forecast by 3 hours.
+It is a simple News App which is using News API and using React + Redux + SASS + WEBPACK. 
+- Users can type the keywords in the search bar, it will return the data which contains the keywords in New York Times and Washington Post. 
+- Users can select the Dropdown with different "Sort Type" and it will sort the current news.
 - It support on Desktop / Tablet / Mobile.
 
-### OpenWeather API.
-- Getting Current Weather
-  api.openweathermap.org/data/2.5/weather?q=London
-- Getting 5 Days Forecast
-  api.openweathermap.org/data/2.5/forecast?q=London,us 
-
+### News API.
+- Getting Data from New York Times and The Washington Post
+  https://newsapi.org/v2/everything?q=&domains=washingtonpost.com,nytimes.com&pageSize=100&sortBy=publishedAt
+  
+- Getting Data with different keywords from New York Times and Washington Post
+  https://newsapi.org/v2/everything?q={keyword}&domains=washingtonpost.com,nytimes.com&pageSize=100&sortBy=publishedAt
+  
+  
 ### React + Redux Flow
-1. When Page loaded, it will load the default City (Hong Kong) and the call the API action, e.g. fetchCurrentForeCast(city).
-2. User click the Search Button, it will call the API action, e.g. fetchCurrentForeCast(city)
-4. If it returns data from API, using dispatch method to store the "currentNewsData" and "FiveDaysForeCastData" in the store (global State). E.g.
+1. When Page loaded, it will load the latest news from the API action, e.g. fetchCurrentNews().
+2. User click the Search Button, it will call the API action, e.g. fetchCurrentNews(keyword).
+4. If it returns data from API, using dispatch method to store the "currentNewsData" in the store (global State). E.g.
       dispatch({
-          type: FETCH_CURRENT_FORECAST,
+          type: FETCH_CURRENT_NEWS,
           currentNewsData: response.data
       });
 3. If it return null or empty, it will show the Server Response Message under the form
-4. MainContainer will detect the global state data is updated and pass the updated data to child components, e.g. CurrentForecastContainer.
-5. User can select one of the "Show Details", it will pass the "selectedDate" and filter the fiveDaysForecastContainer and retun the select date weather details (by 3 hours).
+4. MainContainer will detect the global state data is updated and pass the updated data to child components, e.g. NewsPreviewContainer.
+5. Users can scroll the page and it will load 10 more news and calling the function loadMoreNews().
+6. Users can select different sort type to sort the news by different sort type, e.g. publishedAt.
